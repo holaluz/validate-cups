@@ -1,5 +1,5 @@
 {
-    "name": "holaluz/validate-cups",
+    "name": "holaluz/validateCups",
     "description": "This is a validator for spanish CUPS",
     "type": "library",
     "authors": [
