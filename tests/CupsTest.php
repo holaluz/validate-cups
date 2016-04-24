@@ -6,9 +6,10 @@ class CupsTest extends PHPUnit_Framework_TestCase
 {
     public function testHasNormalLength()
     {
-        $cups1 = 'LL0000000000000000EE3X';
-        $cups2 = 'LL0000000000000000EE';
-        $cups3 = 'LL0000000000000000';
+
+        $cups1 = 'ES0521528120303526VQ3X';
+        $cups2 = 'ES0521528120303526VQ';
+        $cups3 = 'ES0521528120303526';
         $cups4 = '';
 
         $this->assertEquals(true, Cups::validate($cups1));
@@ -19,9 +20,9 @@ class CupsTest extends PHPUnit_Framework_TestCase
 
     public function test2FirstNumbersAreUpperCaseLetters()
     {
-        $cups1 = 'LL0000000000000000EE1X';
-        $cups2 = 'll0000000000000000EE1X';
-        $cups3 = '550000000000000000EE1X';
+        $cups1 = 'ES0521528120303526VQ3X';
+        $cups2 = 'll0521528120303526VQ3X';
+        $cups3 = '550521528120303526VQ3X';
 
         $this->assertEquals(true, Cups::validate($cups1));
         $this->assertEquals(false, Cups::validate($cups2));
@@ -30,8 +31,8 @@ class CupsTest extends PHPUnit_Framework_TestCase
 
     public function test16followSringAreNumbers()
     {
-        $cups1 = 'LL0000000000000000EE1X';
-        $cups2 = 'LLDDDDCCCCCCCCCCCCEE1X';
+        $cups1 = 'ES0521528120303526VQ3X';
+        $cups2 = 'ES0aD1528120303526VQ3X';
 
         $this->assertEquals(true, Cups::validate($cups1));
         $this->assertEquals(false, Cups::validate($cups2));
@@ -39,11 +40,11 @@ class CupsTest extends PHPUnit_Framework_TestCase
 
     public function testControlNumbersAreStringUppercase()
     {
-        $cups1 = 'LL0000000000000000EE0X';
-        $cups2 = 'LL0000000000000000ee0X';
-        $cups3 = 'LL0000000000000000450X';
-        $cups4 = 'LL0000000000000000eE';
-        $cups5 = 'LLDDDDCCCCCCCCCCCC';
+        $cups1 = 'ES0521528120303526VQ3X';
+        $cups2 = 'ES0521528120303526vQ3X';
+        $cups3 = 'ES05215281203035255Q3X';
+        $cups4 = 'ES0521528120303526vw3X';
+        $cups5 = 'ES0521528120303526';
 
         $this->assertEquals(true, Cups::validate($cups1));
         $this->assertEquals(false, Cups::validate($cups2));
@@ -54,8 +55,8 @@ class CupsTest extends PHPUnit_Framework_TestCase
 
     public function testNCharIsADigit()
     {
-        $cups1 = 'LL0000000000000000EE1X';
-        $cups2 = 'LLDDDDCCCCCCCCCCCCEENX';
+        $cups1 = 'ES0521528120303526VQ3X';
+        $cups2 = 'ES0521528120303526VQxX';
 
         $this->assertEquals(true, Cups::validate($cups1));
         $this->assertEquals(false, Cups::validate($cups2));
@@ -64,13 +65,13 @@ class CupsTest extends PHPUnit_Framework_TestCase
     public function testTCharIsASpeficic()
     {
         //FPCX
-        $cups1 = 'LL0000000000000000EE1F';
-        $cups2 = 'LL0000000000000000EE1P';
-        $cups3 = 'LL0000000000000000EE1C';
-        $cups4 = 'LL0000000000000000EE1X';
-        $cups5 = 'LLDDDDCCCCCCCCCCCCEENT';
-        $cups6 = 'LLDDDDCCCCCCCCCCCCEEN5';
-        $cups7 = 'LLDDDDCCCCCCCCCCCCEEN';
+        $cups1 = 'ES0521528120303526VQ3F';
+        $cups2 = 'ES0521528120303526VQ3P';
+        $cups3 = 'ES0521528120303526VQ3C';
+        $cups4 = 'ES0521528120303526VQ3X';
+        $cups5 = 'ES0521528120303526VQ3T';
+        $cups6 = 'ES0521528120303526VQ35';
+        $cups7 = 'ES0521528120303526VQ3';
 
         $this->assertEquals(true, Cups::validate($cups1));
         $this->assertEquals(true, Cups::validate($cups2));
@@ -79,5 +80,16 @@ class CupsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, Cups::validate($cups5));
         $this->assertEquals(false, Cups::validate($cups6));
         $this->assertEquals(false, Cups::validate($cups7));
+    }
+
+    public function testControlNumber()
+    {
+        $cups1 = 'ES0521528120303526VQ3F';
+        $cups2 = 'ES0521528120303526XX3F';
+        $cups3 = 'ES0521528120303526vQ3F';
+
+        $this->assertEquals(true, Cups::validate($cups1));
+        $this->assertEquals(false, Cups::validate($cups2));
+        $this->assertEquals(false, Cups::validate($cups3));
     }
 }
