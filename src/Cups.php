@@ -26,43 +26,20 @@ class Cups
             return false;
         }
 
-        if (strlen($cups) === 22 || strlen($cups) === 20 ) {
-            $countryISO = substr($cups, 0, 2);
+        $numbers = substr($cups, 2, 16);
 
-            if (ctype_upper($countryISO)) {
-                $numbers = substr($cups, 2, 16);
+        if(preg_match_all('/^[A-Z]{2}\d{16}[A-Z]{2}(\d[FPCX])?$/', $cups)) {
+            $module = ($numbers % 529);
+            $check = $module / 23;
+            $check2 = $module % 23;
+            $checkLetter = Cups::getControlNumbers($check);
+            $checkLetter2 = Cups::getControlNumbers($check2);
+            $controlLetter1 =  substr($cups, 18, 1);
+            $controlLetter2 =  substr($cups, 19, 1);
 
-                if (is_numeric($numbers)) {
-                    $control = substr($cups, 18, 2);
-
-                    if (ctype_upper($control)) {
-                        if (strlen($cups) === 22 ) {
-                            $idFrontera =  substr($cups, 20, 1);
-
-                            if (is_numeric($idFrontera)) {
-                                $specialType = substr($cups, 20, 2);
-
-                                if (preg_match('/[FPCX]/', $specialType)) {
-                                    $module = ($numbers % 529);
-                                    $check = $module / 23;
-                                    $check2 = $module % 23;
-                                    $checkLetter = Cups::getControlNumbers($check);
-                                    $checkLetter2 = Cups::getControlNumbers($check2);
-                                    $controlLetter1 =  substr($cups, 18, 1);
-                                    $controlLetter2 =  substr($cups, 19, 1);
-
-                                    if ($checkLetter === $controlLetter1 && $checkLetter2 === $controlLetter2) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        } else {
-                            return true;
-                        }
-                    }
-                }
+            if ($checkLetter === $controlLetter1 && $checkLetter2 === $controlLetter2) {
+                return true;
             }
-
         }
 
         return false;
