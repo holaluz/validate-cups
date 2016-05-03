@@ -3,7 +3,7 @@
 use CupsValidate\Cups;
 
 /**
- * Cups validator test
+ * Cups validator test.
  *
  * @link https://es.wikipedia.org/wiki/C%C3%B3digo_Unificado_de_Punto_de_Suministro
  *
