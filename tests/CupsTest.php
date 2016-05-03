@@ -2,11 +2,18 @@
 
 use CupsValidate\Cups;
 
+/**
+ * Cups validator test
+ *
+ * @link https://es.wikipedia.org/wiki/C%C3%B3digo_Unificado_de_Punto_de_Suministro
+ *
+ * Pattern:
+ * LL DDDD CCCC CCCC CCCC EE NT
+ */
 class CupsTest extends PHPUnit_Framework_TestCase
 {
     public function testHasNormalLength()
     {
-
         $cups1 = 'ES0521528120303526VQ3X';
         $cups2 = 'ES0521528120303526VQ';
         $cups3 = 'ES0521528120303526';
@@ -62,7 +69,7 @@ class CupsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, Cups::validate($cups2));
     }
 
-    public function testTCharIsASpeficic()
+    public function testTCharIsSpeficic()
     {
         //FPCX
         $cups1 = 'ES0521528120303526VQ3F';

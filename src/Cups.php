@@ -16,8 +16,7 @@ class Cups
     /**
      * CUPS validation.
      *
-     * @param string $cups The CUPS
-     *
+     * @param string $cups
      * @return bool
      */
     public static function validate($cups)
@@ -26,9 +25,8 @@ class Cups
             return false;
         }
 
-        $numbers = substr($cups, 2, 16);
-
         if(preg_match_all('/^[A-Z]{2}\d{16}[A-Z]{2}(\d[FPCX])?$/', $cups)) {
+            $numbers = substr($cups, 2, 16);
             $module = ($numbers % 529);
             $check = $module / 23;
             $check2 = $module % 23;
@@ -46,8 +44,9 @@ class Cups
     }
 
     /**
-     * Retorna array with control
+     * Returns the a letter by the number with the table array control
      *
+     * @param int $id
      * @return string
      */
     private static function getControlNumbers($id)
@@ -78,6 +77,6 @@ class Cups
             22 => 'E',
         );
 
-        return $controls[(int)$id];
+        return $controls[$id];
     }
 }
