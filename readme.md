@@ -1,6 +1,7 @@
 # Cups validator
 
 [![Build Status](https://travis-ci.org/holaluz/validate-cups.svg?branch=master)](https://travis-ci.org/holaluz/validate-cups)
+[![StyleCI](https://styleci.io/repos/55066415/shield)](https://styleci.io/repos/55066415)
 
 El CUPS (Código Unificado del Punto de Suministro), en España, es un código único e identificador de un punto de suministro de energía, ya sea de electricidad o gas canalizado.
 Se creó con el objetivo de identificar cada suministro ante compañías suministradoras, distribuidoras, comercializadoras, administración estatal, comunidades autónomas.. etc.
