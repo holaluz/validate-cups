@@ -28,7 +28,7 @@ class Cups
 
         if (preg_match_all('/^[A-Z]{2}\d{16}[A-Z]{2}(\d[FPCX])?$/', $cups)) {
             $numbers = substr($cups, 2, 16);
-            $module = ($numbers % 529);
+            $module = bcmod($numbers, 529);
             $check = $module / 23;
             $check2 = $module % 23;
             $checkLetter = self::getControlNumbers($check);
