@@ -28,9 +28,9 @@ class Cups
 
         if (preg_match_all('/^[A-Z]{2}\d{16}[A-Z]{2}(\d[FPCX])?$/', $cups)) {
             $numbers = substr($cups, 2, 16);
-            $module = bcmod($numbers, 529);
-            $check = $module / 23;
-            $check2 = $module % 23;
+            $modulo = self::modulo($numbers);
+            $check = $modulo / 23;
+            $check2 = $modulo % 23;
             $checkLetter = self::getControlNumbers($check);
             $checkLetter2 = self::getControlNumbers($check2);
             $controlLetter1 = substr($cups, 18, 1);
@@ -80,5 +80,21 @@ class Cups
         ];
 
         return $controls[$id];
+    }
+
+    /**
+     * @param string $numbers
+     *
+     * @return int
+     */
+    private static function modulo($numbers)
+    {
+        if (PHP_INT_SIZE == 4) {
+            $modulo = intval(bcmod($numbers, 529));
+        } else {
+            $modulo = $numbers % 529;
+        }
+
+        return $modulo;
     }
 }
